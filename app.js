@@ -100,8 +100,10 @@ function onCanvasClick() {
 
 // Setting Destroy-Mode Function
 function onDestroyClick() {
+  ctx.save();
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.restore();
 }
 
 // Setting Erase-Mode Function
