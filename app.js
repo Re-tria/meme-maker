@@ -6,10 +6,14 @@ const colorOptions = Array.from(
 );
 const color = document.getElementById("color");
 const modeBtn = document.getElementById("mode-btn");
+const destroyBtn = document.getElementById("destroy-btn");
+const eraseBtn = document.getElementById("erase-btn");
 
 // Default Setting
-canvas.width = 800;
-canvas.height = 800;
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 ctx.lineWidth = lineWidth.value;
 
 let isPainting = false;
@@ -75,7 +79,7 @@ function onColorChange() {
   ctx.fillStyle = colorValue;
 }
 
-// Setting mode-btn Function
+// Setting Fill-Mode Function
 function onModeClick() {
   if (isFilling) {
     isFilling = false;
@@ -88,8 +92,21 @@ function onModeClick() {
 
 function onCanvasClick() {
   if (isFilling) {
-    ctx.fillRect(0, 0, 800, 800);
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
+}
+
+// Setting Destroy-Mode Event
+function onDestroyClick() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+// Setting Erase-Mode Event
+function onEraserClick() {
+  ctx.strokeStyle = "white";
+  isFilling = false;
+  modeBtn.innerText = "Fill";
 }
 
 // Draw Line Event
@@ -107,6 +124,12 @@ colorOptions.forEach((color) => {
 });
 color.addEventListener("change", onColorChange);
 
-// Setting mode-btn Event
+// Setting Fill-Mode Event
 modeBtn.addEventListener("click", onModeClick);
 canvas.addEventListener("click", onCanvasClick);
+
+// Setting Destroy-Mode Event
+destroyBtn.addEventListener("click", onDestroyClick);
+
+// Setting Erase-Mode Event
+eraseBtn.addEventListener("click", onEraserClick);
