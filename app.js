@@ -9,6 +9,7 @@ const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraseBtn = document.getElementById("erase-btn");
 const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
 
 // Default Setting
 const CANVAS_WIDTH = 800;
@@ -122,6 +123,18 @@ function onFileChange(event) {
   };
 }
 
+// Setting Text Input Function
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.font = "48px serif";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
+
 // Draw Line Event
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
@@ -149,3 +162,6 @@ eraseBtn.addEventListener("click", onEraserClick);
 
 // Setting File Input Event
 fileInput.addEventListener("change", onFileChange);
+
+// Setting Text Input Event
+canvas.addEventListener("dblclick", onDoubleClick);
