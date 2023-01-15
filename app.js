@@ -8,6 +8,7 @@ const color = document.getElementById("color");
 const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraseBtn = document.getElementById("erase-btn");
+const fileInput = document.getElementById("file");
 
 // Default Setting
 const CANVAS_WIDTH = 800;
@@ -96,17 +97,29 @@ function onCanvasClick() {
   }
 }
 
-// Setting Destroy-Mode Event
+// Setting Destroy-Mode Function
 function onDestroyClick() {
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
-// Setting Erase-Mode Event
+// Setting Erase-Mode Function
 function onEraserClick() {
   ctx.strokeStyle = "white";
   isFilling = false;
   modeBtn.innerText = "Fill";
+}
+
+// Setting File Input Function
+function onFileChange(event) {
+  const file = event.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    fileInput.value = "";
+  };
 }
 
 // Draw Line Event
@@ -133,3 +146,6 @@ destroyBtn.addEventListener("click", onDestroyClick);
 
 // Setting Erase-Mode Event
 eraseBtn.addEventListener("click", onEraserClick);
+
+// Setting File Input Event
+fileInput.addEventListener("change", onFileChange);
