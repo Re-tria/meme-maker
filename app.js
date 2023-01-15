@@ -5,6 +5,7 @@ const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
 const color = document.getElementById("color");
+const modeBtn = document.getElementById("mode-btn");
 
 // Default Setting
 canvas.width = 800;
@@ -12,6 +13,7 @@ canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
 
 let isPainting = false;
+let isFilling = false;
 const colors = [
   "#1abc9c",
   "#16a085",
@@ -73,6 +75,23 @@ function onColorChange() {
   ctx.fillStyle = colorValue;
 }
 
+// Setting mode-btn Function
+function onModeClick() {
+  if (isFilling) {
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+  } else {
+    isFilling = true;
+    modeBtn.innerText = "Draw";
+  }
+}
+
+function onCanvasClick() {
+  if (isFilling) {
+    ctx.fillRect(0, 0, 800, 800);
+  }
+}
+
 // Draw Line Event
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
@@ -87,3 +106,7 @@ colorOptions.forEach((color) => {
   color.addEventListener("click", onColorClick);
 });
 color.addEventListener("change", onColorChange);
+
+// Setting mode-btn Event
+modeBtn.addEventListener("click", onModeClick);
+canvas.addEventListener("click", onCanvasClick);
