@@ -1,10 +1,11 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+const lineWidth = document.getElementById("line-width");
 
 // Default Setting
 canvas.width = 800;
 canvas.height = 800;
-ctx.linewidth = 2;
+ctx.lineWidth = lineWidth.value;
 
 let isPainting = false;
 const colors = [
@@ -19,15 +20,6 @@ const colors = [
   "#ecf0f1",
   "#95a5a6",
 ];
-
-function onClick(event) {
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(event.offsetX, event.offsetY);
-  const color = colors[Math.floor(Math.random() * colors.length)];
-  ctx.strokeStyle = color;
-  ctx.stroke();
-}
 
 function onMove(event) {
   if (isPainting) {
@@ -44,6 +36,11 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false;
+  ctx.beginPath();
+}
+
+function onLineWidthChange(event) {
+  ctx.lineWidth = event.target.value;
 }
 
 // Draw Line
@@ -51,3 +48,6 @@ canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
+
+// Setting Line-Width
+lineWidth.addEventListener("change", onLineWidthChange);
