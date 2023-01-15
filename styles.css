@@ -6,3 +6,18 @@ html,
 body {
   height: 100%;
 }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* temp color */
+  background-color: tomato;
+}
+
+canvas {
+  width: 800px;
+  height: 800px;
+  background-color: white;
+  border: 5px solid black;
+}
