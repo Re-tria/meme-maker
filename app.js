@@ -11,6 +11,7 @@ const eraseBtn = document.getElementById("erase-btn");
 const fileInput = document.getElementById("file");
 const textInput = document.getElementById("text");
 const saveBtn = document.getElementById("save");
+const body = document.body;
 
 // Default Setting
 const CANVAS_WIDTH = 800;
@@ -75,22 +76,24 @@ function onColorClick(event) {
   ctx.strokeStyle = colorValue;
   ctx.fillStyle = colorValue;
   color.value = colorValue;
+  body.style.backgroundColor = colorValue;
 }
 
 function onColorChange() {
   const colorValue = color.value;
   ctx.strokeStyle = colorValue;
   ctx.fillStyle = colorValue;
+  body.style.backgroundColor = colorValue;
 }
 
 // Setting Fill-Mode Function
 function onModeClick() {
   if (isFilling) {
     isFilling = false;
-    modeBtn.innerText = "Fill";
+    modeBtn.innerText = "🩸 Fill";
   } else {
     isFilling = true;
-    modeBtn.innerText = "Draw";
+    modeBtn.innerText = "🥍 Draw";
   }
 }
 
